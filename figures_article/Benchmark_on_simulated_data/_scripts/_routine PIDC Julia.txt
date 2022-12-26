@@ -1,0 +1,9 @@
+/Users/ulysseherbach/Desktop/NetworkInference.jl-master/test/data/yeast1_10_data.txt
+
+using NetworkInference
+
+test :
+infer_network("/Users/ulysseherbach/Desktop/yeast1_10_data.txt", PIDCNetworkInference(), out_file_path="/Users/ulysseherbach/Desktop/PIDCresult.txt")
+
+
+infer_network("/Users/ulysseherbach/Desktop/data.txt", PIDCNetworkInference(), out_file_path="/Users/ulysseherbach/Desktop/PIDCresult.txt")
