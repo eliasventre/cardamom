@@ -101,13 +101,15 @@ class NetworkModel:
         self.data_bool = np.ones_like(data, dtype='float')
         self.data_bool[vect_t == 0, 0] = 0
         self.weight = np.zeros((C, G_tot, 2), dtype='float')
+        a = np.ones(3, G_tot)
         for g in range(1, G_tot):
             x = data[:, g]
-            at, self.a[-1, g] = infer_kinetics(x, vect_t, verb=verb)
-            self.a[0, g] = max(np.min(at), seuil)
-            self.a[1, g] = max(np.max(at), seuil)
-            if verb: print('Gene {} calibrated...'.format(g), self.a[:, g])
-            self.core_basins_binary(x, self.a[:-1, g], self.a[-1, g], g)
+            at, a[-1, g] = infer_kinetics(x, vect_t, verb=verb)
+            a[0, g] = max(np.min(at), seuil)
+            a[1, g] = max(np.max(at), seuil)
+            if verb: print('Gene {} calibrated...'.format(g), a[:, g])
+            self.core_basins_binary(x, a[:-1, g], a[-1, g], g)
+        self.a[:,:] = a[:,:]
         
         # Remove genes with too small variations
         self.mask = np.ones(G_tot, dtype='bool')
