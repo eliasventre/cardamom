@@ -101,7 +101,7 @@ class NetworkModel:
         self.data_bool = np.ones_like(data, dtype='float')
         self.data_bool[vect_t == 0, 0] = 0
         self.weight = np.zeros((C, G_tot, 2), dtype='float')
-        a = np.ones(3, G_tot)
+        a = np.ones((3, G_tot))
         for g in range(1, G_tot):
             x = data[:, g]
             at, a[-1, g] = infer_kinetics(x, vect_t, verb=verb)
