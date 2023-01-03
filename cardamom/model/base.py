@@ -48,30 +48,6 @@ class NetworkModel:
             self.data_bool[n, g] = alph[np.argmax(self.weight[n, g, :])]
 
 
-    def get_basins_binary(self, data, verb=False):
-        """
-        Compute the basal parameters of filtered genes.
-        """
-        seuil = 1e-3
-        C, G = data.shape
-        times = list(set(data[:, 0]))
-        times.sort()
-        vect_t = data[:, 0]
-
-        self.data_bool = np.ones_like(data, dtype='float')
-        self.data_bool[vect_t == 0, 0] = 0
-        self.weight = np.zeros((C, G, 2), dtype='float')
-        a = np.ones((3, G))
-        for g in range(1, G):
-            x = data[:, g]
-            at, a[-1, g] = infer_kinetics(x, vect_t, verb=verb)
-            a[0, g] = max(np.min(at), seuil)
-            a[1, g] = max(np.max(at), seuil)
-            if verb: print('Gene {} calibrated...'.format(g), a[:, g])
-            self.core_basins_binary(x, a[:-1, g], a[-1, g], g)
-        self.a = a
-
-
     def core_optim(self, x, vect_t, times, G_tot):
         """
         Fit the network model to the data.
@@ -116,14 +92,27 @@ class NetworkModel:
         Return the list of successive objective function values.
         """
         C, G_tot = data.shape
-
-        # Get kinetic parameters
-        self.get_basins_binary(data, verb=verb)
-
-        self.mask = np.ones(G_tot, dtype='bool')
         vect_t = data[:, 0]
         times = list(set(vect_t))
         times.sort()
+
+        # Get kinetic parameters
+        seuil = 1e-3
+        self.data_bool = np.ones_like(data, dtype='float')
+        self.data_bool[vect_t == 0, 0] = 0
+        self.weight = np.zeros((C, G, 2), dtype='float')
+        a = np.ones((3, G))
+        for g in range(1, G):
+            x = data[:, g]
+            at, a[-1, g] = infer_kinetics(x, vect_t, verb=verb)
+            a[0, g] = max(np.min(at), seuil)
+            a[1, g] = max(np.max(at), seuil)
+            if verb: print('Gene {} calibrated...'.format(g), a[:, g])
+            self.core_basins_binary(x, a[:-1, g], a[-1, g], g)
+        self.a = a
+        
+        # Remove genes with too small variations
+        self.mask = np.ones(G_tot, dtype='bool')
         for g in range(1, G_tot):
             meang = [np.mean(data[vect_t == time, g]) for time in times]
             if np.max(meang) - np.min(meang) < .1:
