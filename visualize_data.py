@@ -64,8 +64,8 @@ def plot_data_distrib(data_reference, data_simulated, t_real, t_netw, names, fil
             plt.close()
 
 def plot_data_umap(data_real, data_netw, t_real, t_netw, inputfile):
-    data_real = data_real[:, np.argsort(data_real[0, :])]
-    data_netw = data_netw[:, np.argsort(data_netw[0, :])]
+    data_real = data_real[:, :]
+    data_netw = data_netw[:, :]
 
     # Compute the UMAP projection
     reducer = UMAP(random_state=42, min_dist=0.15)
@@ -233,10 +233,10 @@ def main(argv):
         # Remove stimulus
         data_real = np.delete(data_real, 1, axis=0)
         data_netw = np.delete(data_netw, 1, axis=0)
-        # Remove Sparc gene (index = 34)
-        if p == "Semrau":
-            data_real = np.delete(data_real, 34, axis=1)
-            data_netw = np.delete(data_netw, 34, axis=1)
+        # Remove Sparc gene (index = 36)
+        if p == "Semrau/":
+            data_real = np.delete(data_real, 36, axis=0)
+            data_netw = np.delete(data_netw, 36, axis=0)
         plot_data_umap(data_real, data_netw, t_real, t_netw, inputfile)
 
 
