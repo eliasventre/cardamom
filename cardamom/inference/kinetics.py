@@ -3,17 +3,14 @@ Inference of basal parameters
 This file comes from the 'Harissa' package written by Ulysse Herbach
         https://github.com/ulysseherbach/harissa
 """
-
 import numpy as np
 from numpy import log
 from scipy.special import psi, polygamma, gammaln
-
 
 def log_gamma_poisson_pdf(k, a, b):
 
     ga, gk = gammaln(a), gammaln(k + 1)
     return gammaln(a + k) - (ga + gk) + a * np.log(b) - (a + k) * np.log(b + 1)
-
 
 def estim_gamma_poisson(x):
     """
@@ -31,7 +28,6 @@ def estim_gamma_poisson(x):
         a = m1 ** 2 /v
     b = a / m1
     return a, b
-
 
 def infer_kinetics(x, times, tol=1e-5, max_iter=1000, verb=False):
     """
