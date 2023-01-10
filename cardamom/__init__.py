@@ -1,5 +1,5 @@
 """
-CARDAMOM - Benchmark paper version
+CARDAMOM
 ========
 
 Gene regulatory network inference from single-cell data
@@ -7,7 +7,7 @@ Gene regulatory network inference from single-cell data
 
 Author: Elias Ventre
 """
-__version__ = '1.0 - benchmark paper'
+__version__ = '1.0'
 
 from .model import NetworkModel
 
