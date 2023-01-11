@@ -79,7 +79,7 @@ Run the following script for comparing the UMAP representations between the data
 
 The outputs are the file "Marginals.pdf" and "UMAP.pdf" that can be found in ./[myproject]/Results.
 
-## Preliminaries to using CARDAMOM
+# Preliminaries to using CARDAMOM
 
 Prior to analyzing an experimental scRNA-seq data with CARDAMOM, We recommend that you perform the following steps before launching CARDAMOM on the count table
 
@@ -88,7 +88,7 @@ Prior to analyzing an experimental scRNA-seq data with CARDAMOM, We recommend th
  
  Then, the count table can be generated with the genes selected for which both mRNAs and proteins degradation rates are known. 
 
-### Select a list of relevant genes
+## 1- Select a list of relevant genes
 This is a critical and not so easy task. 
 You should aim to obtain a list in the hundred range. CARDAMOM can perform with more but the resulting output GRN will be less and less interpretable as the number of genes grows. For the time being, we recommend starting with say 50 genes, and add more if needed (i.e. if the overall data generation is improved).
 
@@ -104,7 +104,7 @@ This selected list of genes will have to be incremented by adding on the first l
 This gene list will then have to be saved in the XXX_network/Data folder un the name : panel_genes.txt
 
 
-### Attribute degradation rates for the corresponding mRNAs and proteins
+## 2- Attribute degradation rates for the corresponding mRNAs and proteins
 You can find half-lives for mRNAs and proteins in human in the two papers:
 	•	Blumberg et al. 2021): https://doi.org/10.1186/s12915-021-00949-x 
 	•	Li et al. 2021). : https://doi.org/10.1016/j.molcel.2021.09.015 
