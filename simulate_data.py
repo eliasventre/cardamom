@@ -5,8 +5,8 @@ import getopt
 from alive_progress import alive_bar
 
 # multiplicative coefficient
-r = 5 # technical parameter to transfer the basal regulation in the diagonal of the interaction matrix
-fi = 5 # multiplicative coefficient of the interaction matrix
+r = 2.5 # technical parameter to transfer the basal regulation in the diagonal of the interaction matrix
+fi = 10 # multiplicative coefficient of the interaction matrix
 
 def build_data(data_real, data_bool, time, my_k, model, basal, inter):
 
