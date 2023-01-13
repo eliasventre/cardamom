@@ -30,7 +30,7 @@ It must contain a file "degradation_rates.txt" which will be used for simulating
 - #### Results: 
 It can be empty before the inference, and will contain the results of the simulations, after running the script "visualize_data".
 
-# Preliminaries to using CARDAMOM
+# Before using CARDAMOM
 
 Prior to analyzing an experimental scRNA-seq data with CARDAMOM, We recommend that you perform the following steps before launching CARDAMOM on the count table:
 
