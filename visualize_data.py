@@ -14,7 +14,7 @@ import sys, getopt
 
 plot_distributions = 1 # for plotting the marginal distributions of the simulated genes
 plot_umap = 1 # for plotting the UMAP reduction of the simulated dataset
-plot_comparison = 1 # for plotting the comparison of the marginals using a Kolmogorov-Smornov test
+plot_pvalues = 0 # for plotting the comparison of the marginals using a Kolmogorov-Smornov test
 verb = 1
 
 
@@ -226,7 +226,7 @@ def main(argv):
     if plot_distributions:
         plot_data_distrib(data_real, data_netw, t_real, t_netw, names, inputfile)
 
-    if plot_comparison:
+    if plot_pvalues:
         compare_marginals(data_real, data_netw, t_real, t_netw, names, inputfile)
 
     if plot_umap:
