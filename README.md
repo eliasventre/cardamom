@@ -52,7 +52,7 @@ The selection step can be performed using any combination of the following:
 
 This selected list of genes will have to be incremented by adding on the first line a “gene” called “Stimulus”. It should take a zero value for the 0h time point and 1 for all the others (see below). 
 
-This gene list will then have to be saved in the XXX_network/Data folder un the name : panel_genes.txt
+This gene list will then have to be saved in the myproject/Data folder un the name : panel_genes.txt
 
 
 ## 2- Attribute degradation rates for the corresponding mRNAs and proteins
@@ -66,7 +66,7 @@ at : https://osf.io/4hqt9/?view_only=23288f5b09274a858cc32009c5a0fe78
 
 You will then have to generate the degradation rates from the half-lives using the following formula: degradation_rate=log(2)/half-life
 
-This degradation rate list will then have to be saved in the XXX_network/Rates folder un the name : degradation_rates.txt.
+This degradation rate list will then have to be saved in the myproject/Rates folder un the name : degradation_rates.txt.
 
 ## 3- Generate the count table
 
