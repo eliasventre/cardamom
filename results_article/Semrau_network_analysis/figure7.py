@@ -14,7 +14,7 @@ import sys, getopt
 
 plot_distributions = 1 # for plotting the marginal distributions of the simulated genes
 plot_umap = 1 # for plotting the UMAP reduction of the simulated dataset
-plot_pvalues = 0 # for plotting the comparison of the marginals using a Kolmogorov-Smornov test
+plot_pvalues = 1 # for plotting the comparison of the marginals using a Kolmogorov-Smornov test
 verb = 1
 
 
@@ -38,7 +38,7 @@ def plot_data_distrib(data_reference, data_simulated, t_real, t_netw, names, fil
     nb_genes = len(names)
     list_genes = np.arange(nb_genes)
     nb_pages = int(nb_genes / nb_by_pages) + 1
-    with PdfPages('./{}/Results/Marginals.pdf'.format(file)) as pdf:
+    with PdfPages('figure7B.pdf') as pdf:
         for i in range(nb_pages):
             fig, ax = plt.subplots(len(t_netw), min(nb_by_pages, nb_genes),
                                    figsize=(min(nb_by_pages, nb_genes) * rat, len(t_netw) * rat))
@@ -114,7 +114,7 @@ def plot_data_umap(data_real, data_netw, t_real, t_netw, inputfile):
     ax3.axis('off')
 
     # Export the figure
-    fig.savefig('./{}/Results/UMAP.pdf'.format(inputfile), dpi=300, bbox_inches='tight', pad_inches=0.02)
+    fig.savefig('figure7EF.pdf', dpi=300, bbox_inches='tight', pad_inches=0.02)
 
 def compare_marginals(data_real, data_netw, t_real, t_netw, genes, file):
 
@@ -180,21 +180,13 @@ def compare_marginals(data_real, data_netw, t_real, t_netw, genes, file):
     axA.tick_params(axis='y',direction='out', pad=-0.1)
 
     # Export the figure
-    fig.savefig('./{}/Results/Comparison.pdf'.format(file), dpi=300, bbox_inches='tight', pad_inches=0.02)
+    fig.savefig('figure7A.pdf', dpi=300, bbox_inches='tight', pad_inches=0.02)
 
 def main(argv):
-    inputfile = ''
-    try:
-        opts, args = getopt.getopt(argv, "hi:", ["ifile="])
-    except getopt.GetoptError:
-        sys.exit(2)
-    for opt, arg in opts:
-        if opt in ("-i", "--ifile"):
-            inputfile = arg
 
     ### PLOT DISTRIBUTION
 
-    p = '{}/'.format(inputfile)  # Name of the file where are the data
+    p = 'Semrau/'  # Name of the file where are the data
 
     # Load  data
     # Data location
@@ -224,20 +216,19 @@ def main(argv):
     data_netw = data_netw[order,:]
 
     if plot_distributions:
-        plot_data_distrib(data_real, data_netw, t_real, t_netw, names, inputfile)
+        plot_data_distrib(data_real, data_netw, t_real, t_netw, names, p)
 
     if plot_pvalues:
-        compare_marginals(data_real, data_netw, t_real, t_netw, names, inputfile)
+        compare_marginals(data_real, data_netw, t_real, t_netw, names, p)
 
     if plot_umap:
         # Remove stimulus
         data_real = np.delete(data_real, 1, axis=0)
         data_netw = np.delete(data_netw, 1, axis=0)
         # Remove Sparc gene (index = 36)
-        if p == "tests/Semrau/":
-            data_real = np.delete(data_real, 36, axis=0)
-            data_netw = np.delete(data_netw, 36, axis=0)
-        plot_data_umap(data_real, data_netw, t_real, t_netw, inputfile)
+        data_real = np.delete(data_real, 36, axis=0)
+        data_netw = np.delete(data_netw, 36, axis=0)
+        plot_data_umap(data_real, data_netw, t_real, t_netw, p)
 
 
 

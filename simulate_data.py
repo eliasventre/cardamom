@@ -6,7 +6,7 @@ from alive_progress import alive_bar
 
 # multiplicative coefficient
 r = 2.5 # technical parameter to transfer the basal regulation in the diagonal of the interaction matrix
-fi = 10 # multiplicative coefficient of the interaction matrix
+fi = 7 # multiplicative coefficient of the interaction matrix
 
 def build_data(data_real, data_bool, time, my_k, model, basal, inter):
 
@@ -63,8 +63,8 @@ def main(argv):
     # factor which ensures the convergence to the stationary state.
     # It takes into account the change in the degradation rates after 72h for the Semrau data
 
-    factor_last = 1
-    if p == "Semrau/":
+    factor_last = 2
+    if p == "tests/Semrau/":
         factor_last = 6
 
     # Real data
