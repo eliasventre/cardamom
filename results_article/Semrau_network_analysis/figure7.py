@@ -68,7 +68,7 @@ def plot_data_umap(data_real, data_netw, t_real, t_netw, inputfile):
     data_netw = data_netw[:, :]
 
     # Compute the UMAP projection
-    reducer = UMAP(random_state=42, min_dist=0.15)
+    reducer = UMAP(random_state=42, n_neighbors=15, min_dist=.15)
     proj = reducer.fit(data_real[1:,:].T)
     x_real = proj.transform(data_real[1:,:].T)
     x_netw = proj.transform(data_netw[1:,:].T)
