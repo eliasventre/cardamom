@@ -68,7 +68,7 @@ def plot_data_umap(data_real, data_netw, t_real, t_netw, inputfile):
     data_netw = data_netw[:, :]
 
     # Compute the UMAP projection
-    reducer = UMAP(random_state=42, n_neighbors=15, min_dist=.15)
+    reducer = UMAP(random_state=42, min_dist=.7)
     proj = reducer.fit(data_real[1:,:].T)
     x_real = proj.transform(data_real[1:,:].T)
     x_netw = proj.transform(data_netw[1:,:].T)
@@ -95,14 +95,14 @@ def plot_data_umap(data_real, data_netw, t_real, t_netw, inputfile):
     title = 'Original data'
     ax0.annotate('A', xytext=(-11, 6), fontweight='bold', **opt)
     ax0.annotate(title, xytext=(3, 6), **opt)
-    ax0.scatter(x_real[:, 0], x_real[:, 1], c=c_real, s=2)
+    ax0.scatter(x_real[:, 0], x_real[:, 1], c=c_real, s=4)
 
     # B. Inferred network
     configure(ax1)
     title = 'Inferred network'
     ax1.annotate('B', xytext=(-11, 6), fontweight='bold', **opt)
     ax1.annotate(title, xytext=(3, 6), **opt)
-    ax1.scatter(x_netw[:, 0], x_netw[:, 1], c=c_netw, s=2)
+    ax1.scatter(x_netw[:, 0], x_netw[:, 1], c=c_netw, s=4)
     ax1.set(xlim=ax0.get_xlim(), ylim=ax0.get_ylim())
 
     # Legend panel
