@@ -1,16 +1,16 @@
 # CARDAMOM
 
-CARDAMOM is an executable Gene Regulatory Network (GRN) inference method, adapted for timestamped scRNA-seq dataset. The algorithm consists in fitting the parameters of a mechanistic model of gene expression: the simulation of the model, once calibrated, allows to reproduce the dataset used for the inference. The method has been introduced in [1]. It has been benchmarked among other GRN inference tools and applied on a real dataset in [2]. 
+CARDAMOM is an executable Gene Regulatory Network (GRN) inference method, adapted for time-course scRNA-seq datasets. The algorithm consists in fitting the parameters of a mechanistic model of gene expression: the simulation of the model, once calibrated, allows to reproduce the dataset used for the inference. The method has been introduced in [1]. It has been benchmarked among other GRN inference tools and applied on a real dataset in [2]. 
 
 # Dependencies
 
-The package CARDAMOM depends on the standard scientific libraries _numpy_ and _scipy_. It also depends on the library _numba_ which accelerates the inference method as well as the simulations. The package _harissa_ is used for the function "simulate_data". The package _alive_progress_ is used to show the progression of the function "simulate_data". Finally, the package _umap-learn_ and _matplotlib_ are used for the function "visualize_data".
+The package CARDAMOM depends on the standard scientific libraries `numpy` and `scipy`. It also depends on the library `numba` which accelerates the inference method as well as the simulations. The package `harissa` is used for the function `simulate_data`. The package `alive_progress` is used to show the progression of `simulate_data`. Finally, the package `umap-learn` and `matplotlib` are used for the function `visualize_data`.
 
 They can be installed using pip:
 
-#### pip install harissa
-#### pip install umap-learn
-#### pip install alive_progress
+```
+pip install harissa umap-learn alive_progress
+```
 
 # Structure of the directories
 
@@ -34,12 +34,12 @@ It can be empty before the inference, and will contain the results of the simula
 
 Prior to analyzing an experimental scRNA-seq data with CARDAMOM, We recommend that you perform the following steps before launching CARDAMOM on the count table:
 
-	1.	Select a list of relevant genes,
-	2.	Define degradation rates for the corresponding mRNAs and proteins,
-	3.	Generate the count table.
+1.	Select a list of relevant genes;
+2.	Define degradation rates for the corresponding mRNAs and proteins;
+3.	Generate the count table.
  
 
-## 1- Select a list of relevant genes
+## 1. Select a list of relevant genes
 This is a critical and not so easy task. 
 You should aim to obtain a list in the hundred range. CARDAMOM can perform with more but the resulting output GRN will be less and less interpretable as the number of genes grows. For the time being, we recommend starting with say 50 genes, and add more if needed (i.e. if the overall data generation is improved).
 
@@ -55,7 +55,7 @@ This selected list of genes will have to be incremented by adding on the first l
 This gene list will then have to be saved in the myproject/Data folder un the name : panel_genes.txt
 
 
-## 2- Attribute degradation rates for the corresponding mRNAs and proteins
+## 2. Attribute degradation rates for the corresponding mRNAs and proteins
 You can find half-lives for mRNAs and proteins in human in the two papers:
 	•	Blumberg et al. 2021): https://doi.org/10.1186/s12915-021-00949-x 
 	•	Li et al. 2021). : https://doi.org/10.1016/j.molcel.2021.09.015 
@@ -68,7 +68,7 @@ You will then have to generate the degradation rates from the half-lives using t
 
 This degradation rate list will then have to be saved in the myproject/Rates folder un the name : degradation_rates.txt.
 
-## 3- Generate the count table
+## 3. Generate the count table
 
 CARDAMOM will need a count table with cells as columns and genes as rows, which must be in the .txt format. The first row must corresponds to the timepoints at which the cells are sampled, and the first column to the numero of each gene. Then, each line represents the mRNAs counts associated to a gene for each cell at each timepoint. Note that the second line corresponds to the Stimulus, which is set to 0 at t=0h and to 1 at t > 0h (see [1] Section 5.1 for the details). CARDAMOM will be expecting integer values (number of mRNAs molecules).
 
