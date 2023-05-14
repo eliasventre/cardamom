@@ -23,7 +23,7 @@ An example is `tests/Network4` which corresponds to one of the networks used in 
 
 ## Before using CARDAMOM
 
-Prior to analyzing an experimental scRNA-seq data with CARDAMOM, We recommend that you perform the following steps before launching CARDAMOM on the count table:
+Prior to analyzing an experimental scRNA-seq data with CARDAMOM, we recommend that you perform the following steps:
 
 1.	Select a list of relevant genes;
 2.	Define degradation rates for the corresponding mRNAs and proteins;
