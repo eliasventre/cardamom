@@ -1,10 +1,10 @@
 # CARDAMOM
 
-CARDAMOM is an executable Gene Regulatory Network (GRN) inference method, adapted for time-course scRNA-seq datasets. The algorithm consists in fitting the parameters of a mechanistic model of gene expression: the simulation of the model, once calibrated, allows to reproduce the dataset used for the inference. The method has been introduced in [1]. It has been benchmarked among other GRN inference tools and applied on a real dataset in [2]. 
+CARDAMOM is an executable Gene Regulatory Network (GRN) inference method, adapted for time-course scRNA-seq datasets. The algorithm consists in fitting the parameters of a mechanistic model of gene expression: the simulation of the model, once calibrated, allows to reproduce the dataset used for the inference. The inference method has been introduced in [1]. It has been benchmarked among other GRN inference tools and applied to a real dataset in [2]. The simulation part is based on the [Harissa](https://github.com/ulysseherbach/harissa) package.
 
 # Dependencies
 
-The package CARDAMOM depends on the standard scientific libraries `numpy` and `scipy`. It also depends on the library `numba` which accelerates the inference method as well as the simulations. The package `harissa` is used for the function `simulate_data`. The package `alive_progress` is used to show the progression of `simulate_data`. Finally, the package `umap-learn` and `matplotlib` are used for the function `visualize_data`.
+The package depends on standard scientific libraries `numpy` and `scipy`. It also depends on `numba` which accelerates the inference method as well as the simulations from `harissa`. The package `alive_progress` is used to show the progression of `simulate_data`. Finally, the package `umap-learn` and `matplotlib` are used for the function `visualize_data`.
 
 They can be installed using pip:
 
@@ -105,7 +105,9 @@ Here, ng denotes the number of genes (including the stimulus), and nt the number
 
 Run the following script for simulating the model from the parameters stored in the directory myproject/cardamom:
 
-#### python simulate_data.py -i [myproject]
+```
+python simulate_data.py -i [myproject]
+```
 
 The output is the file "myproject/Data/panel_simulated.text".
 
@@ -113,15 +115,15 @@ The output is the file "myproject/Data/panel_simulated.text".
 
 Run the following script for comparing the UMAP representations between the dataset "myproject/Data/panel.text" and "myproject/Data/panel_simulated.text":
 
-#### python visualize_data.py -i [myproject]
+```bash
+python visualize_data.py -i [myproject]
+```
 
 The outputs are the file "Marginals.pdf" and "UMAP.pdf" that can be found in ./[myproject]/Results.
 
 
 # References
 
-[1] E. Ventre. “Reverse engineering of a mechanistic model of gene expression using metastability and temporal dynamics”. In: In Silico Biology 14 (2021), pp. 89–113.
+[1] E. Ventre. [Reverse engineering of a mechanistic model of gene expression using metastability and temporal dynamics](https://content.iospress.com/articles/in-silico-biology/isb210226). *In Silico Biology*, 2021.
 
-[2] E. Ventre, U. Herbach et al. "One model fits all: combining inference and simulation of gene regulatory networks". In: BioRxiv (2022).
-
-[3] S. Semrau et al. “Dynamics of lineage commitment revealed by single-cell transcriptomics of differentiating embryonic stem cells”. In: Nat Commun 8 (2017), pp. 1–16.
+[2] E. Ventre, U. Herbach et al. [One model fits all: Combining inference and simulation of gene regulatory networks](https://doi.org/10.1371/journal.pcbi.1010962). *PLOS Computational Biology*, 2023.
