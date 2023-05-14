@@ -75,31 +75,16 @@ Run the following script for calibrating the model from the file "myproject/Data
 python infer_network.py -i [myproject]
 ```
 
-Given *ng* the number of genes including stimulus and *nt* the number of data time points, the output is the following files in `myproject/cardamom/`:
+The output consists of the following files in `myproject/cardamom/` where *ng* is the number of genes including stimulus and *nt* is the number of data time points:
 
-`basal_t.npy`  
-Matrix of size *nt* × *ng* × *1* containing the GRN basal parameters inferred at each timepoint;
-
-`inter_t.npy`  
-Matrix of size *nt* × *ng* × *ng* containing the GRN interaction parameters inferred at each timepoint;
-
-`basal.npy`  
-Matrix of size *ng* × *1* such that `basal = basal_t[-1]` containing the final basal parameters;
-
-`inter.npy`  
-Matrix of size *ng* × *ng* such that `inter = inter_t[-1]` containing the final interaction parameters;
-
-`kmin.npy`  
-Vector of size *ng* × *1* containing the minimal burst frequency for each gene;
-
-`kmax.npy`  
-Vector of size *ng* × *1* containing the maximal burst frequency for each gene;
-
-`bet.npy`  
-Vector of size *ng* × *1* containing the inverse burst size parameter for each gene;
-
-`data_bool.npy`  
-Matrix of the same size as the data, used for initializing simulations.
+- `basal_t.npy` Matrix of size *nt* × *ng* × *1* containing the GRN basal parameters inferred at each timepoint;
+- `inter_t.npy` Matrix of size *nt* × *ng* × *ng* containing the GRN interaction parameters inferred at each timepoint;
+- `basal.npy` Matrix of size *ng* × *1* such that `basal = basal_t[-1]` containing the final basal parameters;
+- `inter.npy` Matrix of size *ng* × *ng* such that `inter = inter_t[-1]` containing the final interaction parameters;
+- `kmin.npy` Vector of size *ng* × *1* containing the minimal burst frequency for each gene;
+- `kmax.npy` Vector of size *ng* × *1* containing the maximal burst frequency for each gene;
+- `bet.npy` Vector of size *ng* × *1* containing the inverse burst size parameter for each gene;
+- `data_bool.npy` Matrix of the same size as the data, used for initializing simulations.
  
 ### 2. Simulate a dataset from an inferred network
 
