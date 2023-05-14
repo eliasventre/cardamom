@@ -12,19 +12,14 @@ pip install harissa umap-learn alive_progress
 
 ### Directory structure
 
-The user must create a separate directory named "myproject". The example given here corresponds to the dataset of the directory "test/Network4" generated with one of the networks used for the benchmark of [[2](#Ventre2023)].
+For each analysis, the user must create a `myproject` directory containing the following folders:
 
-The directory "myproject" must contain the following directories:
+- `cardamom/` can be empty before inference, will contain the results of the `infer_network.py` script;
+- `Data/` must contain two files, one named `panel.txt` containing the dataset, and one named `panel_genes.txt` containing the gene names;
+- `Rates/` must contain a file `degradation_rates.txt` that will be used by the `simulate_data.py` script;
+- `Results/` can be empty before inference, will contain the results of the `visualize_data.py` script.
 
-- "cardamom":
-It can be empty before the inference, and will contain the results of the inference, after running the script "infer_network".
-- "Data": 
-It must contain 2 files, one named "panel.txt" which contains the dataset for the inference, and one named "panel_genes.txt" which contains the names of the genes.
-- "Rates": 
-It must contain a file "degradation_rates.txt" which will be used for simulating the model, when running the script  "simulate_data".
-- "Results": 
-It can be empty before the inference, and will contain the results of the simulations, after running the script "visualize_data".
-
+An example is `tests/Network4` which corresponds to one of the networks used in [[2](#Ventre2023)].
 
 ## Before using CARDAMOM
 
