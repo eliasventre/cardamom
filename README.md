@@ -8,7 +8,7 @@ The package depends on standard scientific libraries `numpy` and `scipy`. It als
 
 They can be installed using pip:
 
-```
+```bash
 pip install harissa umap-learn alive_progress
 ```
 
@@ -44,25 +44,23 @@ This is a critical and not so easy task.
 You should aim to obtain a list in the hundred range. CARDAMOM can perform with more but the resulting output GRN will be less and less interpretable as the number of genes grows. For the time being, we recommend starting with say 50 genes, and add more if needed (i.e. if the overall data generation is improved).
 
 The selection step can be performed using any combination of the following:
-1.1 Select genes known in the litterature to be important for the process being studied
-1.2 Select HVG using custom algorithms like scran or Seurat
-1.3  Select “dynamaically important” genes using
-1.4 Select differentially expressed genes using a basic t-test between two time points.
-1.5 Select most delta-entropic genes between two time points.
+
+- 1.1 Select genes known in the litterature to be important for the process being studied
+- 1.2 Select HVG using custom algorithms like scran or Seurat
+- 1.3 Select “dynamically important” genes
+- 1.4 Select differentially expressed genes using a basic t-test between two time points
+- 1.5 Select most delta-entropic genes between two time points.
 
 This selected list of genes will have to be incremented by adding on the first line a “gene” called “Stimulus”. It should take a zero value for the 0h time point and 1 for all the others (see below). 
 
-This gene list will then have to be saved in the myproject/Data folder un the name : panel_genes.txt
+This gene list will then have to be saved in the myproject/Data folder under the name: panel_genes.txt
 
 
 ## 2. Attribute degradation rates for the corresponding mRNAs and proteins
-You can find half-lives for mRNAs and proteins in human in the two papers:
-	•	Blumberg et al. 2021): https://doi.org/10.1186/s12915-021-00949-x 
-	•	Li et al. 2021). : https://doi.org/10.1016/j.molcel.2021.09.015 
-Only “short-lived” proteins half-lives are estimated in the Li paper. In any case, the “maximum” half life of proteins will be set by the cell cycle duration. So make sure that no protein has a larger half-life that the cell cycle duration.
 
-A compiled table can be found 
-at : https://osf.io/4hqt9/?view_only=23288f5b09274a858cc32009c5a0fe78
+You can find half-lives for mRNAs and proteins in human in two papers: [Blumberg et al. (2021) ](https://doi.org/10.1186/s12915-021-00949-x) and [Li et al. (2021)](https://doi.org/10.1016/j.molcel.2021.09.015). Only “short-lived” protein half-lives are estimated in the Li paper. In any case, the “maximum” half-life of proteins will be set by the cell cycle duration. So make sure that no protein has a larger half-life that the cell cycle duration.
+
+A compiled table can be found at: https://osf.io/4hqt9/?view_only=23288f5b09274a858cc32009c5a0fe78
 
 You will then have to generate the degradation rates from the half-lives using the following formula: degradation_rate=log(2)/half-life
 
@@ -98,20 +96,21 @@ The output are the following files:
 
 "myproject/cardamom/data_bool.npy": matrix of the same size as the data used for the inference, that is used for initializing the simulations.
  
-Here, ng denotes the number of genes (including the stimulus), and nt the number of timepoints in the data.
+Here, ‘ng’ denotes the number of genes (including the stimulus), and ‘nt’ the number of timepoints in the data.
  
 
-## 2- Simulate a dataset from an inferred network
+## 2. Simulate a dataset from an inferred network
 
 Run the following script for simulating the model from the parameters stored in the directory myproject/cardamom:
 
-```
+```bash
 python simulate_data.py -i [myproject]
 ```
 
 The output is the file "myproject/Data/panel_simulated.text".
 
-## 3- Compare the simulations to the reference dataset
+
+## 3. Compare the simulations to the reference dataset
 
 Run the following script for comparing the UMAP representations between the dataset "myproject/Data/panel.text" and "myproject/Data/panel_simulated.text":
 
