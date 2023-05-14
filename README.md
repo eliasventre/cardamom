@@ -87,7 +87,7 @@ Run the following script for comparing UMAP representations of `myproject/Data/p
 python visualize_data.py -i [myproject]
 ```
 
-The outputs are the file "Marginals.pdf" and "UMAP.pdf" that can be found in ./[myproject]/Results.
+The output images are saved in `myproject/Results/`.
 
 
 ## References
