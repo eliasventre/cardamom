@@ -1,6 +1,6 @@
 # CARDAMOM
 
-CARDAMOM is an executable Gene Regulatory Network (GRN) inference method, adapted for time-course scRNA-seq datasets. The algorithm consists in fitting the parameters of a mechanistic model of gene expression: the simulation of the model, once calibrated, allows to reproduce the dataset used for the inference. The inference method has been introduced in [1]. It has been benchmarked among other GRN inference tools and applied to a real dataset in [2]. The simulation part is based on the [Harissa](https://github.com/ulysseherbach/harissa) package.
+CARDAMOM is an executable Gene Regulatory Network (GRN) inference method, adapted for time-course scRNA-seq datasets. The algorithm consists in fitting the parameters of a mechanistic model of gene expression: the simulation of the model, once calibrated, allows to reproduce the dataset used for the inference. The inference method has been introduced in [[1](#Ventre2021)]. It has been benchmarked among other GRN inference tools and applied to a real dataset in [[2](#Ventre2023)]. The simulation part is based on the [Harissa](https://github.com/ulysseherbach/harissa) package.
 
 ### Dependencies
 
@@ -12,7 +12,7 @@ pip install harissa umap-learn alive_progress
 
 ### Directory structure
 
-The user must create a separate directory named "myproject". The example given here corresponds to the dataset of the directory "test/Network4" generated with one of the networks used for the benchmark of [2].
+The user must create a separate directory named "myproject". The example given here corresponds to the dataset of the directory "test/Network4" generated with one of the networks used for the benchmark of [[2](#Ventre2023)].
 
 The directory "myproject" must contain the following directories:
 
@@ -62,7 +62,7 @@ This degradation rate list will then have to be saved in the myproject/Rates fol
 
 ### 3. Generate the count table
 
-CARDAMOM will need a count table with cells as columns and genes as rows, which must be in the .txt format. The first row must correspond to the time points at which the cells are sampled, and the first column to the index of each gene. Then, each line represents the mRNA counts associated to a gene for each cell at each timepoint. Note that the second line corresponds to the Stimulus, which is set to 0 at t=0h and to 1 at t > 0h (see [1] Section 5.1 for details). CARDAMOM will be expecting integer values (mRNA counts).
+CARDAMOM will need a count table with cells as columns and genes as rows, which must be in the .txt format. The first row must correspond to the time points at which the cells are sampled, and the first column to the index of each gene. Then, each line represents the mRNA counts associated to a gene for each cell at each timepoint. Note that the second line corresponds to the Stimulus, which is set to 0 at t=0h and to 1 at t > 0h (see [[1](#Ventre2021)] Section 5.1 for details). CARDAMOM will be expecting integer values (mRNA counts).
 
 
 ## Tutorial
@@ -75,30 +75,30 @@ Run the following script for calibrating the model from the file "myproject/Data
 python infer_network.py -i [myproject]
 ```
 
-Given *ng* the number of genes including stimulus and *nt* the number of data time points, the output is the following:
+Given *ng* the number of genes including stimulus and *nt* the number of data time points, the output is the following files in `myproject/cardamom/`:
 
-- `myproject/cardamom/basal_t.npy`  
-Matrix of size *nt* × *ng* × *1* containing the basal parameters of the GRN inferred by CARDAMOM at each timepoint;
+`basal_t.npy`  
+Matrix of size *nt* × *ng* × *1* containing the GRN basal parameters inferred at each timepoint;
 
-- `myproject/cardamom/inter_t.npy`  
-Matrix of size *nt* × *ng* × *ng* containing the GRN inferred by CARDAMOM at each timepoint;
+`inter_t.npy`  
+Matrix of size *nt* × *ng* × *ng* containing the GRN interaction parameters inferred at each timepoint;
 
-- `myproject/cardamom/basal.npy`  
-Matrix of size *ng* × *1* containing the basal parameters of the GRN inferred by CARDAMOM (`basal = basal_t[-1]`);
+`basal.npy`  
+Matrix of size *ng* × *1* such that `basal = basal_t[-1]` containing the final basal parameters;
 
-- `myproject/cardamom/inter.npy`  
-Matrix of size *ng* × *ng* containing the GRN inferred by CARDAMOM (`inter = inter_t[-1]`);
+`inter.npy`  
+Matrix of size *ng* × *ng* such that `inter = inter_t[-1]` containing the final interaction parameters;
 
-- `myproject/cardamom/kmin.npy`  
-Vector of size *ng* × *1* containing the minimal burst rates frequency for each gene;
+`kmin.npy`  
+Vector of size *ng* × *1* containing the minimal burst frequency for each gene;
 
-- `myproject/cardamom/kmax.npy`  
-Vector of size *ng* × *1* containing the maximal burst rates frequency for each gene;
+`kmax.npy`  
+Vector of size *ng* × *1* containing the maximal burst frequency for each gene;
 
-- `myproject/cardamom/bet.npy`  
-Vector of size *ng* × *1* containing the scaling of the burst sizes for each gene;
+`bet.npy`  
+Vector of size *ng* × *1* containing the inverse burst size parameter for each gene;
 
-- `myproject/cardamom/data_bool.npy`  
+`data_bool.npy`  
 Matrix of the same size as the data, used for initializing simulations.
  
 ### 2. Simulate a dataset from an inferred network
@@ -124,6 +124,6 @@ The outputs are the file "Marginals.pdf" and "UMAP.pdf" that can be found in ./[
 
 ## References
 
-[1] E. Ventre. [Reverse engineering of a mechanistic model of gene expression using metastability and temporal dynamics](https://content.iospress.com/articles/in-silico-biology/isb210226). *In Silico Biology*, 2021.
+<a name="Ventre2021"></a>[1] E. Ventre. [Reverse engineering of a mechanistic model of gene expression using metastability and temporal dynamics](https://content.iospress.com/articles/in-silico-biology/isb210226). *In Silico Biology*, 2021.
 
-[2] E. Ventre, U. Herbach et al. [One model fits all: Combining inference and simulation of gene regulatory networks](https://doi.org/10.1371/journal.pcbi.1010962). *PLOS Computational Biology*, 2023.
+<a name="Ventre2023"></a>[2] E. Ventre, U. Herbach et al. [One model fits all: Combining inference and simulation of gene regulatory networks](https://doi.org/10.1371/journal.pcbi.1010962). *PLOS Computational Biology*, 2023.
