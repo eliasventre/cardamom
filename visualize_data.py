@@ -168,7 +168,7 @@ def compare_marginals(data_real, data_netw, t_real, t_netw, genes, file):
     axA.set_xticks(np.arange(G))
     axA.set_yticks(np.arange(T))
     axA.set_xticklabels(genes, rotation=45, ha='right', rotation_mode='anchor',
-        fontsize=6.5)
+        fontsize=3)
     axA.set_yticklabels([f'{int(t)}h' for t in t_real], fontsize=6.5)
     axA.spines[:].set_visible(False)
     axA.set_xticks(np.arange(G+1)-0.5, minor=True)
