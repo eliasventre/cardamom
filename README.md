@@ -7,7 +7,7 @@ CARDAMOM is an executable gene regulatory network (GRN) inference method, adapte
 The package depends on standard scientific libraries `numpy` and `scipy`. It also depends on `numba` which accelerates the inference method as well as the simulations from `harissa`. The package `alive_progress` is used to show the progression of `simulate_data`. Finally, `umap-learn` and `matplotlib` are used for the function `visualize_data`. They can be installed using pip:
 
 ```bash
-pip install harissa umap-learn alive_progress
+pip install umap-learn alive_progress harissa==3.0.7
 ```
 
 ### Directory structure
