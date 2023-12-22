@@ -40,7 +40,15 @@ def build_data(data_real, data_bool, time, my_k, model, basal, inter):
                     c = np.random.choice(np.argwhere(data_real[:, 0] == 0)[:, 0], my_k[cnt], replace=False)
                 cnt_k, cnt = 0, cnt + 1
             if k >= C_0:
-                sim = model.simulate(time[k], data_real[c[cnt_k], :], data_bool[c[cnt_k], :], use_numba=True)
+                rna_init = data_real[c[cnt_k], :]
+                prot_init = data_bool[c[cnt_k], :]
+                time_ant = 0
+                for time_post in time[1:k+1]:
+                    model.d = model.d * 1 # This is where we want to change the rate : we could also modify the file to have a three dimensional array (one rate per time)
+                    sim = model.simulate(time_post - time_ant, rna_init, prot_init, use_numba=True)
+                    rna_init = sim.m[-1]
+                    prot_init = sim.p[-1]
+                    time_tmp_ant = time_post
                 my_data[k + 1, 2:] = np.random.poisson(sim.m[-1])
             cnt_k += 1
             bar()
