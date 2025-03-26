@@ -2,6 +2,8 @@
 
 CARDAMOM is an executable gene regulatory network (GRN) inference method, adapted to time-course scRNA-seq datasets. The algorithm consists in calibrating the parameters of a mechanistic model of gene expression: the calibrated model can then be simulated, which allows to reproduce the dataset used for inference. The inference method has been introduced in [[1](#Ventre2021)]. It has been benchmarked along with other GRN inference tools and applied to a real dataset in [[2](#Ventre2023)]. The simulation part is based on the [Harissa](https://github.com/ulysseherbach/harissa) package.
 
+Note: This package is currently in active development. For reproducibility purpose, the version published in [[2](#Ventre2023)] is available [here](https://github.com/eliasventre/cardamom/tree/article-pcb).
+
 ### Dependencies
 
 The package depends on standard scientific libraries `numpy` and `scipy`. It also depends on `numba` which accelerates the inference method as well as the simulations from `harissa`. The package `alive_progress` is used to show the progression of `simulate_data`. Finally, `umap-learn` and `matplotlib` are used for the function `visualize_data`. They can be installed using pip:
