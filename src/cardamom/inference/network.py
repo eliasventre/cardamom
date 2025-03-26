@@ -20,16 +20,19 @@ from scipy.optimize import minimize
 from scipy.special import expit
 from numba import njit
 
-sl = 5e-3 # pseudo l1 coefficient
+sl = 5e-3  # pseudo l1 coefficient
 p = .4
+
 
 @njit
 def penalization_l1(x, s):
     return (x-s/2)*(x>s) - (x+s/2)*(-x>s) + ((x**2)/(2*s))*(x<=s and -x<=s)
 
+
 @njit
 def grad_penalization_l1(x, s):
     return 1*(x>s) - 1*(-x>s) + (x/s)*(x<=s and -x<=s)
+
 
 @njit
 def penalization(Q, X, X_init, time_init, l, sc, G, cnt_move, j):
@@ -44,6 +47,7 @@ def penalization(Q, X, X_init, time_init, l, sc, G, cnt_move, j):
     tmp_diag = cnt_move[j] / (1 + np.sum(np.abs(X_init[j, :-1])) - abs(X_init[j, j]))
     Q += l_diag * (penalization_l1(X[j] - X_init[j, j], sc) + (X[j] - X_init[j, j]) ** 2) * tmp_diag
     return Q
+
 
 @njit
 def grad_penalization(dq, X, X_init, time_init, l, sc, G, cnt_move, j):
@@ -60,6 +64,7 @@ def grad_penalization(dq, X, X_init, time_init, l, sc, G, cnt_move, j):
     tmp_diag = cnt_move[j] / (1 + np.sum(np.abs(X_init[j, :-1])) - abs(X_init[j, j]))
     dq[j] += l_diag * (grad_penalization_l1(X[j] - X_init[j, j], sc) + 2 * (X[j] - X_init[j, j])) * tmp_diag
     return dq
+
 
 def objective(X, y, vect_kon, ko, X_init, time_init, l, sc, G, cnt_move, j):
     """
