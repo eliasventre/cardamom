@@ -9,10 +9,10 @@ dependencies = [
     "numpy>=1.26",
     "scipy>=1.13",
     "numba>=0.60",
+    "harissa>=3.1",
     "matplotlib>=3.8",
-    "umap-learn",
-    "alive_progress",
-    "harissa",
+    "umap-learn>=0.5",
+    "alive-progress>=3.2",
 ]
 requires-python = ">=3.10"
 authors = [
@@ -32,7 +32,12 @@ Homepage = "https://github.com/eliasventre/cardamom"
 # Documentation = "https://eliasventre.github.io/cardamom"
 
 [tool.hatch.build.targets.sdist]
-exclude = ["/.git*"]
+exclude = [
+    "/.*",
+    "/doc",
+    "/results_article",
+    "/tests",
+]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/cardamom"]
