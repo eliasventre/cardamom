@@ -1,0 +1,46 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cardamom"
+dynamic = ["version"]
+dependencies = [
+    "numpy>=1.26",
+    "scipy>=1.13",
+    "numba>=0.60",
+    "matplotlib>=3.8",
+    "umap-learn",
+    "alive_progress",
+    "harissa",
+]
+requires-python = ">=3.10"
+authors = [
+    {name = "Elias Ventre", email = "elias.ventre@inria.fr"},
+    {name = "Ulysse Herbach", email = "ulysse.herbach@inria.fr"},
+]
+description = "A package for inference and simulation of gene regulatory networks"
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/eliasventre/cardamom"
+# Documentation = "https://eliasventre.github.io/cardamom"
+
+[tool.hatch.build.targets.sdist]
+exclude = ["/.git*"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cardamom"]
+
+[tool.hatch.version]
+source = "vcs"
+raw-options = {local_scheme = "no-local-version"}
+
+[tool.ruff.lint]
+select = ["E", "F", "W"]
+ignore = ["E402", "E741"]
